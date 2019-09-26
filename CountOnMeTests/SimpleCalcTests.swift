@@ -1,34 +1,152 @@
 //
 //  SimpleCalcTests.swift
-//  SimpleCalcTests
+//  CountOnMeTests
 //
-//  Created by Vincent Saluzzo on 29/03/2019.
+//  Created by Mélanie Obringer on 18/09/2019.
 //  Copyright © 2019 Vincent Saluzzo. All rights reserved.
 //
 
 import XCTest
-@testable import SimpleCalc
+@testable import CountOnMe
 
 class SimpleCalcTests: XCTestCase {
-
+    var simpleCalc: SimpleCalc!
+    
+    
+    // Setup
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+        simpleCalc = SimpleCalc()
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    // test operations
+    // test addition
+    func testGivenOneAddTwo_WhenTappedEqualButton_ThenResultIsThree() {
+        simpleCalc.tappedNumberButton(numberText: "1")
+        simpleCalc.tappedAdditionButton()
+        simpleCalc.tappedNumberButton(numberText: "2")
+        simpleCalc.tappedEqualButton()
+        
+        XCTAssertTrue(simpleCalc.expressionIsCorrect)
+        XCTAssertTrue(simpleCalc.expressionHaveEnoughElement)
+        XCTAssertEqual(simpleCalc.calculText, "1 + 2 = 3")
+        XCTAssertEqual(simpleCalc.calculText.last, "3")
+        
+}
+    // test substraction
+    func testGivenTwoSubbstractOne_WhenTappedEqualButton_ThenResultIsOne() {
+        simpleCalc.tappedNumberButton(numberText: "2")
+        simpleCalc.tappedSubstractionButton()
+        simpleCalc.tappedNumberButton(numberText: "1")
+        simpleCalc.tappedEqualButton()
+        
+        XCTAssertTrue(simpleCalc.expressionIsCorrect)
+        XCTAssertTrue(simpleCalc.expressionHaveEnoughElement)
+        XCTAssertEqual(simpleCalc.calculText, "2 - 1 = 1")
+        XCTAssertEqual(simpleCalc.calculText.last, "1")
+}
+    // test division
+    func testGivenFourDivideByTwo_WhenTappedEqualButton_ThenResultIsTwo() {
+        simpleCalc.tappedNumberButton(numberText: "4")
+        simpleCalc.tappedDivisionButton()
+        simpleCalc.tappedNumberButton(numberText: "2")
+        simpleCalc.tappedEqualButton()
+        
+        XCTAssertTrue(simpleCalc.expressionIsCorrect)
+        XCTAssertTrue(simpleCalc.expressionHaveEnoughElement)
+        XCTAssertEqual(simpleCalc.calculText, "4 / 2 = 2")
+        XCTAssertEqual(simpleCalc.calculText.last, "2")
+}
+    // test multiplication
+    func testGivenThreeMultiplyByTwo_WhenTappedEqualButton_ThenResultIsSix() {
+        simpleCalc.tappedNumberButton(numberText: "3")
+        simpleCalc.tappedMultiplicationButton()
+        simpleCalc.tappedNumberButton(numberText: "2")
+        simpleCalc.tappedEqualButton()
+        
+        XCTAssertTrue(simpleCalc.expressionIsCorrect)
+        XCTAssertTrue(simpleCalc.expressionHaveEnoughElement)
+        XCTAssertEqual(simpleCalc.calculText, "3 x 2 = 6")
+        XCTAssertEqual(simpleCalc.calculText.last, "6")
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    // test priority calcul
+    func testGivenCalculAllOperators_WhenTappedEqualButton_ThenResultIsOk() {
+        simpleCalc.tappedNumberButton(numberText: "3")
+        simpleCalc.tappedAdditionButton()
+        simpleCalc.tappedNumberButton(numberText: "5")
+        simpleCalc.tappedSubstractionButton()
+        simpleCalc.tappedNumberButton(numberText: "2")
+        simpleCalc.tappedMultiplicationButton()
+        simpleCalc.tappedNumberButton(numberText: "3")
+        simpleCalc.tappedDivisionButton()
+        simpleCalc.tappedNumberButton(numberText: "2")
+        simpleCalc.tappedEqualButton()
+        
+        XCTAssertTrue(simpleCalc.expressionIsCorrect)
+        XCTAssertTrue(simpleCalc.expressionHaveEnoughElement)
+        XCTAssertEqual(simpleCalc.calculText, "3 + 5 - 2 x 3 / 2 = 5")
+        XCTAssertEqual(simpleCalc.calculText.last, "5")
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    // Test - Division by zero
+    func testGivenDivisionByZeroImpossible_WhenDivisionByZero_ThenIsFalse() {
+        simpleCalc.tappedNumberButton(numberText: "1")
+        simpleCalc.tappedDivisionButton()
+        simpleCalc.tappedNumberButton(numberText: "0")
+        simpleCalc.tappedEqualButton()
+        
+        XCTAssertFalse(simpleCalc.expressionDivisionByZero)
     }
-
+    // Test - Button Clear
+    func testGivenClearTextView_WhenTappedClear_ThenItClear() {
+        simpleCalc.tappedNumberButton(numberText: "3")
+        simpleCalc.clear()
+        XCTAssertEqual(simpleCalc.calculText, String())
+        
+    }
+    // Test - Error
+    // Expression doesn't have enough elements, tapped 3 and equal
+    func testGivenCalculWithOneNumber_WhenExpressionHaveNotEnoughElement_ThenMessageErrorExpression() {
+        simpleCalc.tappedNumberButton(numberText: "3")
+        simpleCalc.tappedEqualButton()
+        
+        XCTAssertFalse(simpleCalc.expressionHaveEnoughElement)
+    }
+    
+    // Tapped = without number
+    func testGivenCalculWithoutNumber_WhenTappedEqualButton_ThenMessageErrorStartWithNumber() {
+        simpleCalc.tappedEqualButton()
+        
+        XCTAssertEqual(simpleCalc.calculText, String())
+    }
+    
+    // Error tapped 2 operators, tapped 1 + x =
+    func testGivenCalculWithTwoOperandsSuccessive_WhenExpressionHaveEnoughElements_ThenMessageErrorOperator() {
+        simpleCalc.tappedNumberButton(numberText: "1")
+        simpleCalc.tappedAdditionButton()
+        simpleCalc.tappedDivisionButton()
+        
+        XCTAssertFalse(simpleCalc.expressionHaveEnoughElement)
+        XCTAssertFalse(simpleCalc.expressionIsCorrect)
+        XCTAssertEqual(simpleCalc.calculText, "1 + ")
+    }
+    // Error calcul start with operator
+    func testGivenCalculWithOperatorAtFirst_WhenArrayIsEmpty_ThenMessageErrorAddNumber() {
+        simpleCalc.tappedDivisionButton()
+        
+        XCTAssertTrue(simpleCalc.arrayIsEmpty)
+        XCTAssertEqual(simpleCalc.calculText, String())
+    }
+    
+    // Expression is incorrect, tapped 3 + 5 x =
+    func testGivenCalculWithOperandAndEgalSucessive_WhenExpressionIsIncorrect_ThenMessageErrorExpression() {
+        simpleCalc.tappedNumberButton(numberText: "3")
+        simpleCalc.tappedAdditionButton()
+        simpleCalc.tappedNumberButton(numberText: "5")
+        simpleCalc.tappedMultiplicationButton()
+        simpleCalc.tappedEqualButton()
+        
+        XCTAssertFalse(simpleCalc.expressionIsCorrect)
+        XCTAssertEqual(simpleCalc.calculText, "3 + 5 x ")
+    }
 }
