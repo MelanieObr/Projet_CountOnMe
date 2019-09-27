@@ -23,24 +23,24 @@ class SimpleCalc {
         return calculText.split(separator: " ").map { "\($0)" }
     }
     
-    // check if element at last isn't an operator
+    /// check if element at last isn't an operator
     var expressionIsCorrect: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "/"
     }
-    // check if expression contains enough elements
+    /// check if expression contains enough elements
     var expressionHaveEnoughElement: Bool {
         return elements.count >= 3
     }
-    // check if expression has a result
+    /// check if expression has a result
     var expressionHaveResult: Bool {
         return calculText.firstIndex(of: "=") != nil
     }
-    // checks if a number has been entered
+    /// checks if a number has been entered
     var arrayIsEmpty: Bool {
         return elements.count == 0
     }
     
-    // check if divisor is zero
+    /// check if divisor is zero
     var expressionDivisionByZero: Bool {
         // create a copy variable
         var tempElements = elements
@@ -55,13 +55,13 @@ class SimpleCalc {
         }
         return false
     }
-    // check if expression contains "x" or "/"
+    /// check if expression contains "x" or "/"
     var priorityOperator: Bool {
         return (elements.firstIndex(of: "x") != nil) || (elements.firstIndex(of: "/") != nil)
     }
     
-    /// METHODS
-    
+    // METHODS
+    //
     // send notification with a customed message for errors
     private func sendNotification(message: String) {
         let name = Notification.Name("alertDisplay")
@@ -70,12 +70,11 @@ class SimpleCalc {
     
     // append a number
     func tappedNumberButton(numberText: String) {
-       refreschCalcul()
-       calculText.append(numberText)
+        refreschCalcul()
+        calculText.append(numberText)
     }
     
-    
-    // append an operator
+    /// append an operator
     func tappedOperatorSign(operand: String) {
         //check no operator to start the operation
         refreschCalcul()
@@ -108,15 +107,18 @@ class SimpleCalc {
         calculText = String()
     }
     
-        func refreschCalcul() {
-            if expressionHaveResult{
-                calculText = ""
-            }
+    func refreschCalcul() {
+        if expressionHaveResult{
+            calculText = ""
         }
+    }
     
-    // remove dot and zero to display an integer
+    /// remove dot and zero to display an integer
     private func removeDotZero(result: Double) -> String {
-        let doubleAsString = NumberFormatter.localizedString(from: (NSNumber(value: result)), number: .decimal)
+        var doubleAsString = NumberFormatter.localizedString(from: (NSNumber(value: result)), number: .decimal)
+        if doubleAsString.contains(",") {
+            doubleAsString = doubleAsString.replacingOccurrences(of: ",", with: "")
+        }
         return doubleAsString
     }
     
