@@ -39,7 +39,7 @@ class SimpleCalc {
         return calculText.firstIndex(of: "=") != nil
     }
     
-    /// checks if a number has been entered
+    /// check if a number has been entered
     var arrayIsEmpty: Bool {
         return elements.count == 0
     }
@@ -108,7 +108,7 @@ class SimpleCalc {
         tappedOperatorSign(operand: " / ")
     }
     
-    // clear operation
+    // clear operation and refresh calcul if expression has result
     func clear() {
         calculText = String()
     }
@@ -171,7 +171,7 @@ class SimpleCalc {
         }
         // create local copy of elements
         var operationsToReduce = elements
-        // check if operation contains signs x and / to get priority calcul
+        // check if operation contains signs x and / (priority operators) to get priority calcul
         if priorityOperator {
             operationsToReduce = priorityCalcul(elements: elements)
         }
