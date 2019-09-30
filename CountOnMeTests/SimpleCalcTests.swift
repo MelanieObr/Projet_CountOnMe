@@ -47,15 +47,15 @@ class SimpleCalcTests: XCTestCase {
     
     // test division
     func testGivenFourDivideByTwo_WhenTappedEqualButton_ThenResultIsTwo() {
-        simpleCalc.tappedNumberButton(numberText: "4")
+        simpleCalc.tappedNumberButton(numberText: "3")
         simpleCalc.tappedDivisionButton()
         simpleCalc.tappedNumberButton(numberText: "2")
         simpleCalc.tappedEqualButton()
         
         XCTAssertTrue(simpleCalc.expressionIsCorrect)
         XCTAssertTrue(simpleCalc.expressionHaveEnoughElement)
-        XCTAssertEqual(simpleCalc.calculText, "4 / 2 = 2")
-        XCTAssertEqual(simpleCalc.calculText.last, "2")
+        XCTAssertEqual(simpleCalc.calculText, "3 / 2 = 1.5")
+        
     }
     
     // test multiplication
@@ -68,25 +68,25 @@ class SimpleCalcTests: XCTestCase {
         XCTAssertTrue(simpleCalc.expressionIsCorrect)
         XCTAssertTrue(simpleCalc.expressionHaveEnoughElement)
         XCTAssertEqual(simpleCalc.calculText, "3 x 2 = 6")
-        XCTAssertEqual(simpleCalc.calculText.last, "6")
+        
     }
     
     // test priority calcul
     func testGivenCalculAllOperators_WhenTappedEqualButton_ThenResultIsOk() {
-        simpleCalc.tappedNumberButton(numberText: "33")
+        simpleCalc.tappedNumberButton(numberText: "333")
         simpleCalc.tappedAdditionButton()
-        simpleCalc.tappedNumberButton(numberText: "55")
+        simpleCalc.tappedNumberButton(numberText: "555")
         simpleCalc.tappedSubstractionButton()
-        simpleCalc.tappedNumberButton(numberText: "22")
+        simpleCalc.tappedNumberButton(numberText: "222")
         simpleCalc.tappedMultiplicationButton()
-        simpleCalc.tappedNumberButton(numberText: "33")
+        simpleCalc.tappedNumberButton(numberText: "333")
         simpleCalc.tappedDivisionButton()
-        simpleCalc.tappedNumberButton(numberText: "23")
+        simpleCalc.tappedNumberButton(numberText: "22")
         simpleCalc.tappedEqualButton()
         
         XCTAssertTrue(simpleCalc.expressionIsCorrect)
         XCTAssertTrue(simpleCalc.expressionHaveEnoughElement)
-        XCTAssertEqual(simpleCalc.calculText, "33 + 55 - 22 x 33 / 23 = 56.435")
+        XCTAssertEqual(simpleCalc.calculText, "333 + 555 - 222 x 333 / 22 = -2472.273")
     }
     
     // Test - Division by zero

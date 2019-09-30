@@ -18,6 +18,7 @@ class SimpleCalc {
             NotificationCenter.default.post(name: Notification.Name("updateDisplay"), object: nil, userInfo: ["updateDisplay":calculText])
         }
     }
+    
     //separate each elements
     var elements: [String] {
         return calculText.split(separator: " ").map { "\($0)" }
@@ -27,14 +28,17 @@ class SimpleCalc {
     var expressionIsCorrect: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "/"
     }
+    
     /// check if expression contains enough elements
     var expressionHaveEnoughElement: Bool {
         return elements.count >= 3
     }
+    
     /// check if expression has a result
     var expressionHaveResult: Bool {
         return calculText.firstIndex(of: "=") != nil
     }
+    
     /// checks if a number has been entered
     var arrayIsEmpty: Bool {
         return elements.count == 0
@@ -55,6 +59,7 @@ class SimpleCalc {
         }
         return false
     }
+    
     /// check if expression contains "x" or "/"
     var priorityOperator: Bool {
         return (elements.firstIndex(of: "x") != nil) || (elements.firstIndex(of: "/") != nil)
@@ -88,6 +93,7 @@ class SimpleCalc {
             sendNotification(message: "Un opérateur est déja mis !")
         }
     }
+    
     // methods for each operator
     func tappedAdditionButton() {
         tappedOperatorSign(operand: " + ")
@@ -113,11 +119,11 @@ class SimpleCalc {
         }
     }
     
-    /// remove dot and zero to display an integer
-    private func removeDotZero(result: Double) -> String {
-        var doubleAsString = NumberFormatter.localizedString(from: (NSNumber(value: result)), number: .decimal)
+    // remove dot and zero to display an integer
+   private func removeDotZero(result: Double) -> String {
+    var doubleAsString = NumberFormatter.localizedString(from: (NSNumber(value: result)), number: .decimal)
         if doubleAsString.contains(",") {
-            doubleAsString = doubleAsString.replacingOccurrences(of: ",", with: "")
+           doubleAsString = doubleAsString.replacingOccurrences(of: ",", with: "")
         }
         return doubleAsString
     }
@@ -176,14 +182,17 @@ class SimpleCalc {
             guard let right = Double(operationsToReduce[2]) else { return }
             
             var result: Double = 0.0
+            
             switch operand {
             case "+": result = left + right
             case "-": result = left - right
             default:  sendNotification(message: "Expression incorrecte !")
             }
+            // Insert result at index 3
             operationsToReduce = Array(operationsToReduce.dropFirst(3))
             operationsToReduce.insert("\(removeDotZero(result: result))", at: 0)
         }
+        
         // display result at first index
         guard let result = operationsToReduce.first else { return }
         calculText.append(" = \(result)")
