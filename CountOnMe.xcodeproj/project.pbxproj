@@ -11,7 +11,6 @@
 		1FA43BD5224E569900F565CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA43BD4224E569900F565CB /* ViewController.swift */; };
 		1FA43BD8224E569900F565CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA43BD6224E569900F565CB /* Main.storyboard */; };
 		1FA43BDD224E569A00F565CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA43BDB224E569A00F565CB /* LaunchScreen.storyboard */; };
-		B86C73AC233E15DF005E9ED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86C73AB233E15DF005E9ED8 /* Assets.xcassets */; };
 		B86C73B2233E1762005E9ED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86C73B1233E1762005E9ED8 /* Assets.xcassets */; };
 		B87A518D23325A8000C02AB6 /* SimpleCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87A518C23325A8000C02AB6 /* SimpleCalc.swift */; };
 		B87A519D23325B7200C02AB6 /* SimpleCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87A519C23325B7200C02AB6 /* SimpleCalcTests.swift */; };
@@ -34,7 +33,6 @@
 		1FA43BD7224E569900F565CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1FA43BDC224E569A00F565CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FA43BDE224E569A00F565CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B86C73AB233E15DF005E9ED8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B86C73B1233E1762005E9ED8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B87A518C23325A8000C02AB6 /* SimpleCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCalc.swift; sourceTree = "<group>"; };
 		B87A519223325B1B00C02AB6 /* CountOnMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountOnMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,7 +214,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FA43BDD224E569A00F565CB /* LaunchScreen.storyboard in Resources */,
-				B86C73AC233E15DF005E9ED8 /* Assets.xcassets in Resources */,
 				B86C73B2233E1762005E9ED8 /* Assets.xcassets in Resources */,
 				1FA43BD8224E569900F565CB /* Main.storyboard in Resources */,
 			);
