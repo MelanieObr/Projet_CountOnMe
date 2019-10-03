@@ -10,7 +10,7 @@ import Foundation
 
 final class SimpleCalc {
     
-    // MARK: - PROPERTIES
+    // MARK: - Properties
     
     // display
     var calculText: String = "1 + 1 = 2" {
@@ -20,7 +20,7 @@ final class SimpleCalc {
     }
     
     // separate each elements
-    var elements: [String] {
+    private var elements: [String] {
         return calculText.split(separator: " ").map { "\($0)" }
     }
     
@@ -35,7 +35,7 @@ final class SimpleCalc {
     }
     
     /// check if expression has a result
-    var expressionHaveResult: Bool {
+    private var expressionHaveResult: Bool {
         return calculText.firstIndex(of: "=") != nil
     }
     
@@ -50,11 +50,11 @@ final class SimpleCalc {
     }
     
     /// check if expression contains "x" or "/"
-    var priorityOperator: Bool {
+    private var priorityOperator: Bool {
         return (elements.firstIndex(of: "x") != nil) || (elements.firstIndex(of: "/") != nil)
     }
     
-    // MARK: - METHODS
+    // MARK: - Methods
     
     // send notification with a customed message for errors
     private func sendNotification(message: String) {
@@ -102,7 +102,7 @@ final class SimpleCalc {
         calculText = String()
     }
     
-    func refreschCalcul() {
+    private func refreschCalcul() {
         if expressionHaveResult{
             calculText = ""
         }
