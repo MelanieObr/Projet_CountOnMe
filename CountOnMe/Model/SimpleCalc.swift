@@ -8,18 +8,18 @@
 
 import Foundation
 
-class SimpleCalc {
+final class SimpleCalc {
     
-    //PROPERTIES
+    // MARK: - PROPERTIES
     
-    //display
+    // display
     var calculText: String = "1 + 1 = 2" {
         didSet {
             NotificationCenter.default.post(name: Notification.Name("updateDisplay"), object: nil, userInfo: ["updateDisplay":calculText])
         }
     }
     
-    //separate each elements
+    // separate each elements
     var elements: [String] {
         return calculText.split(separator: " ").map { "\($0)" }
     }
@@ -46,18 +46,7 @@ class SimpleCalc {
     
     /// check if divisor is zero
     var expressionDivisionByZero: Bool {
-        // create a copy variable
-        var tempElements = elements
-        // iterate while tempElements contains "/"
-        while tempElements.contains("/") {
-            // get the first index of the division
-            guard let index = tempElements.firstIndex(of: "/") else { return false }
-            // return true if 0 is behind /
-            guard !(tempElements[index + 1] == "0") else { return true }
-            // replace / by string to manage each division
-            tempElements[index] = String()
-        }
-        return false
+        return calculText.contains("/ 0")
     }
     
     /// check if expression contains "x" or "/"
@@ -65,8 +54,8 @@ class SimpleCalc {
         return (elements.firstIndex(of: "x") != nil) || (elements.firstIndex(of: "/") != nil)
     }
     
-    // METHODS
-    //
+    // MARK: - METHODS
+    
     // send notification with a customed message for errors
     private func sendNotification(message: String) {
         let name = Notification.Name("alertDisplay")
@@ -120,10 +109,10 @@ class SimpleCalc {
     }
     
     // remove dot and zero to display an integer
-   private func removeDotZero(result: Double) -> String {
-    var doubleAsString = NumberFormatter.localizedString(from: (NSNumber(value: result)), number: .decimal)
+    private func removeDotZero(result: Double) -> String {
+        var doubleAsString = NumberFormatter.localizedString(from: (NSNumber(value: result)), number: .decimal)
         if doubleAsString.contains(",") {
-           doubleAsString = doubleAsString.replacingOccurrences(of: ",", with: "")
+            doubleAsString = doubleAsString.replacingOccurrences(of: ",", with: "")
         }
         return doubleAsString
     }

@@ -8,21 +8,27 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    // Instance of class
+final class ViewController: UIViewController {
+    
+    // MARK: - Properties
+    
     let simpleCalc = SimpleCalc()
     
-    // Outlets
+    // MARK: - Outlets
+    
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     
-    // View Life cycles
+    // MARK: - View Life cycles
+    
     // Listen notifications
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(displayCalcul(notification:)), name: Notification.Name("updateDisplay"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(displayAlert(notification:)), name: Notification.Name("alertDisplay"), object: nil)
     }
+    
+    // MARK: - Methods
     
     // Method called to update display
     @objc func displayCalcul(notification: Notification) {
@@ -43,7 +49,8 @@ class ViewController: UIViewController {
         present(alertVC, animated: true, completion: nil)
     }
     
-    // View actions
+    // MARK: - View actions
+    
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         guard let numberText = sender.title(for: .normal) else {
             return
@@ -70,9 +77,9 @@ class ViewController: UIViewController {
     @IBAction func tappedClearButton(_ sender: UIButton) {
         simpleCalc.clear()
     }
+    
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         simpleCalc.tappedEqualButton()
     }
-    
 }
 

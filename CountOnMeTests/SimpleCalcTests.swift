@@ -9,16 +9,21 @@
 import XCTest
 @testable import CountOnMe
 
-class SimpleCalcTests: XCTestCase {
+final class SimpleCalcTests: XCTestCase {
+    
+    // MARK: - Property
+    
     var simpleCalc: SimpleCalc!
     
+    // MARK: - Setup
     
-    // Setup
     override func setUp() {
         super.setUp()
         simpleCalc = SimpleCalc()
     }
-    // test operations
+    
+    // MARK: - test operations
+    
     // test addition
     func testGivenOneAddTwo_WhenTappedEqualButton_ThenResultIsThree() {
         simpleCalc.tappedNumberButton(numberText: "1")
@@ -106,7 +111,8 @@ class SimpleCalcTests: XCTestCase {
         XCTAssertEqual(simpleCalc.calculText, String())
     }
     
-    // Test - Error
+    // MARK: - Test - Error
+    
     // Expression doesn't have enough elements, tapped 3 and equal
     func testGivenCalculWithOneNumber_WhenExpressionHaveNotEnoughElement_ThenMessageErrorExpression() {
         simpleCalc.tappedNumberButton(numberText: "3")
